@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "777080804709",
+    "project_id": "connacta",
+    "storage_bucket": "connacta.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:777080804709:android:35f19dec6ff315cd467d8c",
+        "android_client_info": {
+          "package_name": "com.altalha.connacta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "777080804709-ljpp0lc49teqscs6qlfj42lo1adml9qn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeM-PF0lSZxDoR-VBKfQFTL_gjzer3ONo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "777080804709-ljpp0lc49teqscs6qlfj42lo1adml9qn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
