@@ -36,23 +36,28 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Expanded(
               child: Center(
-                child: Image.asset(AssetConstants.iconLogo, width: 180,),
+                child: Image.asset(
+                  AssetConstants.iconLogo,
+                  width: 180,
+                ),
               ),
             ),
             Visibility(
-                visible: isLoading,
-                replacement: const SizedBox.shrink(),
-                child: const SizedBox(
-                  height: 40,
-                  width: 40,
-                  child: CircularProgressIndicator(),
-                ),),
+              visible: isLoading,
+              replacement: const SizedBox.shrink(),
+              child: const SizedBox(
+                height: 40,
+                width: 40,
+                child: CircularProgressIndicator(),
+              ),
+            ),
             Visibility(
               visible: isLoading,
               replacement: const SizedBox.shrink(),
               child: const SizedBox(
                 height: 32,
-              ),),
+              ),
+            ),
           ],
         ),
       ),
