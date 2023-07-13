@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../constants/asset_constants.dart';
-import '../widgets/space.dart';
-import '../widgets/underline_text_field.dart';
-import '../widgets/wide_button.dart';
+import '../../../constants/asset_constants.dart';
+import '../../widgets/buttons/wide_button.dart';
+import '../../widgets/space.dart';
+import '../../widgets/text_fields/underline_text_field.dart';
 import 'create_profile_screen.dart';
 
 class CreateUserScreen extends StatefulWidget {

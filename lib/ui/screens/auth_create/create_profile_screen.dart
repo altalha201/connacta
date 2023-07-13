@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../widgets/border_text_field.dart';
-import '../widgets/space.dart';
+import '../../widgets/appbars/appbars.dart';
+import '../../widgets/buttons/wide_button.dart';
+import '../../widgets/space.dart';
+import '../../widgets/text_fields/border_text_field.dart';
+import 'photo_select_screen.dart';
 
 class CreateProfileScreen extends StatefulWidget {
   const CreateProfileScreen({Key? key}) : super(key: key);
@@ -11,16 +15,12 @@ class CreateProfileScreen extends StatefulWidget {
 }
 
 class _CreateProfileScreenState extends State<CreateProfileScreen> {
-  String _selectedGender = "";
+  String _selectedGender = "others";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Create Your Profile"),
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-      ),
+      appBar: Appbars.centerTitled(title: "Create Your Profile"),
       body: Padding(
         padding: const EdgeInsets.all(32.0),
         child: SingleChildScrollView(
@@ -93,7 +93,14 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                     _selectedGender = value!;
                   });
                 },
-              )
+              ),
+              Space.vertical(size: 32.0),
+              WideButton(
+                onPressed: () {
+                  Get.to(const PhotoSelectScreen());
+                },
+                buttonText: 'Continue',
+              ),
             ],
           ),
         ),

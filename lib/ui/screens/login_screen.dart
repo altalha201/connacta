@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 
 import '../../constants/asset_constants.dart';
 import '../../constants/color_constants.dart';
+import '../widgets/buttons/wide_button.dart';
 import '../widgets/space.dart';
-import '../widgets/underline_text_field.dart';
-import '../widgets/wide_button.dart';
-import 'create_user_screen.dart';
+import '../widgets/text_fields/underline_text_field.dart';
+import 'auth_create/create_user_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
