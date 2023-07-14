@@ -1,4 +1,3 @@
-import 'package:connacta/ui/screens/loged_in/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,6 +6,7 @@ import '../../../constants/color_constants.dart';
 import '../../widgets/appbars/appbars.dart';
 import '../../widgets/buttons/wide_button.dart';
 import '../../widgets/space.dart';
+import '../logged_in/home_screen.dart';
 
 class PhotoSelectScreen extends StatefulWidget {
   const PhotoSelectScreen({Key? key}) : super(key: key);

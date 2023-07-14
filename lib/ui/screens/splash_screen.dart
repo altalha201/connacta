@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../constants/asset_constants.dart';
-import 'login_screen.dart';
+import 'logged_in/home_screen.dart';
+// import 'login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -22,7 +23,8 @@ class _SplashScreenState extends State<SplashScreen> {
           isLoading = true;
         });
         Future.delayed(const Duration(seconds: 2)).then((value) {
-          Get.offAll(const LoginScreen(), transition: Transition.downToUp);
+          // Get.offAll(const LoginScreen(), transition: Transition.downToUp);
+          Get.offAll(const HomeScreen(), transition: Transition.downToUp);
         });
       });
     });
