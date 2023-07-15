@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../constants/asset_constants.dart';
+import '../controller/data_controller/app_preferences.dart';
+import '../controller/ui_controllers/theme_controller.dart';
 import 'logged_in/home_screen.dart';
 // import 'login_screen.dart';
 
@@ -18,6 +20,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) {
+      Get.find<AppPreferences>().getAppTheme();
+      if(Get.find<AppPreferences>().appTheme != null) {
+        Get.find<ThemeController>().setTheme(Get.find<AppPreferences>().appTheme!);
+      }
       Future.delayed(const Duration(seconds: 2), () {
         setState(() {
           isLoading = true;

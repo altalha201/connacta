@@ -9,6 +9,7 @@ class AppTheme {
       primary: ColorConstants.primary,
       brightness: Brightness.light,
     ),
+    scaffoldBackgroundColor: ColorConstants.white.withOpacity(0.95),
     iconTheme: const IconThemeData(color: ColorConstants.primary),
     radioTheme: RadioThemeData(
         fillColor:
