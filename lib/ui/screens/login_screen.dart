@@ -7,6 +7,7 @@ import '../widgets/buttons/wide_button.dart';
 import '../widgets/space.dart';
 import '../widgets/text_fields/underline_text_field.dart';
 import 'auth_create/create_user_screen.dart';
+import 'logged_in/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -42,7 +43,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   Space.vertical(size: 24.0),
                   WideButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.offAll(const HomeScreen());
+                    },
                     buttonText: 'Login',
                   ),
                   Space.vertical(size: 16.0),

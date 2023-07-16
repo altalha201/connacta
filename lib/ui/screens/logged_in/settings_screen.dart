@@ -1,13 +1,15 @@
-import 'package:connacta/ui/screens/logged_in/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../constants/asset_constants.dart';
 import '../../../constants/color_constants.dart';
+import '../../controller/ui_controllers/home_screen_controller.dart';
 import '../../controller/ui_controllers/theme_controller.dart';
 import '../../widgets/list_item/settings_list_item.dart';
 import '../../widgets/space.dart';
+import '../login_screen.dart';
+import 'home_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -105,14 +107,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           } else {
                             controller.deactivateDarkMood();
                           }
-                          // print(Get.isDarkMode);
-                          // /*Get.changeTheme(Get.isDarkMode
-                          //     ? AppTheme.lightTheme
-                          //     : AppTheme.darkTheme);
-                          // print(Get.isDarkMode);*/
-                          // Get.changeThemeMode(Get.isDarkMode ? ThemeMode.light : ThemeMode.dark);
-                          // print(Get.isDarkMode);
-
                         },
                       );
                     }
@@ -135,11 +129,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
               Space.vertical(size: 8.0),
-              const SettingsListItem(
+              SettingsListItem(
                 leadingIcon: Icons.logout,
                 title: "Logout",
                 startItem: true,
                 lastItem: true,
+                onTap: () {
+                  Get.find<HomeScreenController>().resetHome();
+                  Get.offAll(const LoginScreen());
+                },
               ),
             ],
           ),

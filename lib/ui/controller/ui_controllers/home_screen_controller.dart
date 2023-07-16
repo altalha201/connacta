@@ -28,4 +28,8 @@ class HomeScreenController extends GetxController {
     _currentTab = _tabs[_currentTabIndex];
     update();
   }
+
+  void resetHome() {
+    updateTab(0);
+  }
 }

@@ -64,7 +64,7 @@ class _PhotoSelectScreenState extends State<PhotoSelectScreen> {
                 Expanded(
                   child: WideButton(
                     onPressed: () {
-                      Get.to(const HomeScreen());
+                      Get.offAll(const HomeScreen());
                     },
                     buttonText: "Skip",
                     backgroundColor: ColorConstants.gray,

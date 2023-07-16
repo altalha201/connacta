@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../widgets/list_item/chat_list_item.dart';
+
 class ChatListTab extends StatefulWidget {
   const ChatListTab({Key? key}) : super(key: key);
 
@@ -10,6 +12,13 @@ class ChatListTab extends StatefulWidget {
 class _ChatListTabState extends State<ChatListTab> {
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Chats"),);
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          for (int i = 0; i < 10; i++)
+            const ChatListItem(),
+        ],
+      ),
+    );
   }
 }

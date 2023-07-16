@@ -25,12 +25,6 @@ class _HomeScreenState extends State<HomeScreen> {
               : ColorConstants.white,
           elevation: 0,
           title: Text(homeController.title),
-          titleTextStyle: TextStyle(
-              color: Get.find<ThemeController>().darkMoodActivated
-                  ? ColorConstants.white
-                  : ColorConstants.black,
-              fontSize: 20,
-              fontWeight: FontWeight.w700),
           leading: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Image.asset(AssetConstants.iconLogo),
@@ -40,11 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () {
                 Get.off(const SettingsScreen());
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.settings,
-                color: Get.find<ThemeController>().darkMoodActivated
-                    ? ColorConstants.white
-                    : ColorConstants.black,
               ),
             ),
           ],
