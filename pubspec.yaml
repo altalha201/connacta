@@ -25,6 +25,7 @@ dependencies:
   awesome_notifications: ^0.6.21
   flutter_swipe_detector: ^2.0.0
   intl: ^0.17.0
+  email_validator: ^2.1.17
 
 dev_dependencies:
   flutter_test:

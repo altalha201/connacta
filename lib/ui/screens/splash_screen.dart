@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 
 import '../../constants/asset_constants.dart';
 import '../controller/data_controller/app_preferences.dart';
+import '../controller/data_controller/user_preferences.dart';
 import '../controller/ui_controllers/theme_controller.dart';
 import 'logged_in/home_screen.dart';
-// import 'login_screen.dart';
+import 'login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -29,8 +30,11 @@ class _SplashScreenState extends State<SplashScreen> {
           isLoading = true;
         });
         Future.delayed(const Duration(seconds: 2)).then((value) {
-          // Get.offAll(const LoginScreen(), transition: Transition.downToUp);
-          Get.offAll(const HomeScreen(), transition: Transition.downToUp);
+          if(Get.find<UserPreferences>().isLogIn()) {
+            Get.offAll(const HomeScreen(), transition: Transition.downToUp);
+          } else {
+            Get.offAll(const LoginScreen(), transition: Transition.downToUp);
+          }
         });
       });
     });
