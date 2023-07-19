@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 
 import '../../../constants/asset_constants.dart';
 import '../../../constants/color_constants.dart';
-import '../../controller/ui_controllers/home_screen_controller.dart';
-import '../../controller/ui_controllers/theme_controller.dart';
+import '../../../controller/ui_controllers/home_screen_controller.dart';
+import '../../../controller/ui_controllers/theme_controller.dart';
 import 'settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {

@@ -9,7 +9,9 @@ import '../../widgets/space.dart';
 import '../logged_in/home_screen.dart';
 
 class PhotoSelectScreen extends StatefulWidget {
-  const PhotoSelectScreen({Key? key}) : super(key: key);
+  const PhotoSelectScreen({Key? key, required this.name, required this.email}) : super(key: key);
+
+  final String name, email;
 
   @override
   State<PhotoSelectScreen> createState() => _PhotoSelectScreenState();
@@ -43,8 +45,8 @@ class _PhotoSelectScreenState extends State<PhotoSelectScreen> {
                       horizontal: 52.0, vertical: 120.0),
                   child: ListTile(
                     leading: Image.network(AssetConstants.defaultProfile, fit: BoxFit.cover,),
-                    title: const Text("Name"),
-                    subtitle: const Text("Email"),
+                    title: Text(widget.name),
+                    subtitle: Text(widget.email),
                   ),
                 )
               ],

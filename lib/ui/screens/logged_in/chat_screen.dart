@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../constants/asset_constants.dart';
 import '../../../constants/color_constants.dart';
-import '../../controller/ui_controllers/theme_controller.dart';
+import '../../../controller/ui_controllers/theme_controller.dart';
 import '../../utils/text_styles.dart';
 import '../../widgets/box_widgets/received_image_box.dart';
 import '../../widgets/box_widgets/received_message_box.dart';

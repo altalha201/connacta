@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 
 import '../../../constants/asset_constants.dart';
 import '../../../constants/color_constants.dart';
-import '../../controller/data_controller/user_preferences.dart';
-import '../../controller/ui_controllers/theme_controller.dart';
+import '../../../controller/data_controller/user_preferences.dart';
+import '../../../controller/ui_controllers/theme_controller.dart';
 import '../../widgets/list_item/settings_list_item.dart';
 import '../../widgets/space.dart';
 import 'home_screen.dart';

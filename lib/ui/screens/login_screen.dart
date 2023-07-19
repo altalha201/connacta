@@ -4,8 +4,9 @@ import 'package:get/get.dart';
 
 import '../../constants/asset_constants.dart';
 import '../../constants/color_constants.dart';
-import '../controller/logic_controller/login_controller.dart';
+import '../../controller/logic_controller/login_controller.dart';
 import '../widgets/buttons/wide_button.dart';
+import '../widgets/loading_widgets/center_loading.dart';
 import '../widgets/space.dart';
 import '../widgets/text_fields/underline_text_field.dart';
 import 'auth_create/create_user_screen.dart';
@@ -33,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: GetBuilder<LoginController>(builder: (loginController) {
 
             if (loginController.loginInProgress) {
-              return const Center(child: CircularProgressIndicator(),);
+              return const CenterLoading();
             }
 
             return Center(

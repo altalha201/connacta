@@ -3,8 +3,9 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
-import '../../utils/pop_messages.dart';
+import '../../ui/utils/pop_messages.dart';
 import '../data_controller/user_preferences.dart';
+import 'device_key_controller.dart';
 
 class LoginController extends GetxController{
   bool _loginInProgress = false;
@@ -22,6 +23,7 @@ class LoginController extends GetxController{
       );
       if (credential.user != null) {
         Get.find<UserPreferences>().saveUserID(credential.user!.uid);
+        await DeviceKeyController().updateToken();
         returnBool = true;
       }
     } on FirebaseAuthException catch (e) {

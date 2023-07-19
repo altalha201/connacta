@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../constants/asset_constants.dart';
-import '../controller/data_controller/app_preferences.dart';
-import '../controller/data_controller/user_preferences.dart';
-import '../controller/ui_controllers/theme_controller.dart';
+import '../../controller/data_controller/app_preferences.dart';
+import '../../controller/data_controller/user_preferences.dart';
+import '../../controller/ui_controllers/theme_controller.dart';
 import 'logged_in/home_screen.dart';
 import 'login_screen.dart';
 

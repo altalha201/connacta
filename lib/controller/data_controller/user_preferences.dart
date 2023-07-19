@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../../screens/login_screen.dart';
+import '../../ui/screens/login_screen.dart';
 import '../ui_controllers/home_screen_controller.dart';
 
 class UserPreferences extends GetxController {

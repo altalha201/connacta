@@ -1,6 +1,7 @@
-import 'package:connacta/ui/controller/data_controller/app_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../data_controller/app_preferences.dart';
 
 class ThemeController extends GetxController{
   bool _darkMoodActivated = false;

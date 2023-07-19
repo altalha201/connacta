@@ -1,8 +1,8 @@
-import 'package:connacta/ui/controller/ui_controllers/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../constants/color_constants.dart';
+import '../../../controller/ui_controllers/theme_controller.dart';
 import '../space.dart';
 
 class SettingsListItem extends StatelessWidget {

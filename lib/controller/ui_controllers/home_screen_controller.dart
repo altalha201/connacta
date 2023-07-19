@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../screens/logged_in/home_tabs/chat_list_tab.dart';
-import '../../screens/logged_in/home_tabs/people_list_tab.dart';
-import '../../screens/logged_in/home_tabs/story_tab.dart';
+import '../../ui/screens/logged_in/home_tabs/chat_list_tab.dart';
+import '../../ui/screens/logged_in/home_tabs/people_list_tab.dart';
+import '../../ui/screens/logged_in/home_tabs/story_tab.dart';
 
 class HomeScreenController extends GetxController {
   int _currentTabIndex = 0;

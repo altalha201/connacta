@@ -10,7 +10,8 @@ class UnderlineTextField extends StatelessWidget {
     this.obscureText = false,
     this.readOnly = false,
     this.validator,
-    this.suffix, this.keyboardType,
+    this.suffix,
+    this.keyboardType,
   }) : super(key: key);
 
   final String? hintText;
