@@ -2,8 +2,6 @@ class AssetConstants {
   // assets/images
   static const String iconLogo = "assets/images/icon_logo.png";
   static const String mainLogo = "assets/images/main_logo.png";
-  static const String phoneFrame = "assets/images/phone_frame.png";
-  static const String phoneFrame2 = "assets/images/phone_frame_2.png";
 
   // network
   static const String defaultProfile =

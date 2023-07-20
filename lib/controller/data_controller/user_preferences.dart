@@ -10,6 +10,7 @@ class UserPreferences extends GetxController {
   String? get userID => _userID;
 
   bool isLogIn() {
+    getUserID();
     return _userID != null;
   }
 

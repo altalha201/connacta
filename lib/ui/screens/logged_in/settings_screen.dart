@@ -5,10 +5,14 @@ import 'package:get/get.dart';
 import '../../../constants/asset_constants.dart';
 import '../../../constants/color_constants.dart';
 import '../../../controller/data_controller/user_preferences.dart';
+import '../../../controller/logic_controller/profile_data_controller.dart';
 import '../../../controller/ui_controllers/theme_controller.dart';
 import '../../widgets/list_item/settings_list_item.dart';
+import '../../widgets/picture_widgets/display_picture.dart';
 import '../../widgets/space.dart';
+import '../auth_create/photo_select_screen.dart';
 import 'home_screen.dart';
+import 'profile_pictures_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -18,6 +22,8 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  final profileDataInstance = Get.find<ProfileDataController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,21 +41,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                height: 180,
-                width: 180,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(90),
-                  color: ColorConstants.white,
-                  image: const DecorationImage(
-                    image: NetworkImage(AssetConstants.defaultProfile),
-                  ),
-                ),
-              ),
+              const DisplayPicture(),
               Space.vertical(size: 16.0),
-              const Text(
-                "Name",
-                style: TextStyle(
+              Text(
+                profileDataInstance.currentUser.userName ?? "Name",
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w200,
                   fontFamily: 'barlow',
@@ -69,11 +65,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 title: 'Profile Info Update',
                 startItem: true,
               ),
+              SettingsListItem(
+                leadingIcon: Icons.change_circle_outlined,
+                title: "Update Profile Picture",
+                onTap: () {
+                  Get.to(
+                    PhotoSelectScreen(
+                      name: profileDataInstance.currentUser.userName ?? "",
+                      email: profileDataInstance.currentUser.userEmail ?? "",
+                      imgURL: profileDataInstance.currentUser.userDpUrl ??
+                          AssetConstants.defaultProfile,
+                      fromSettings: true,
+                    ),
+                  );
+                },
+              ),
               const SettingsListItem(
-                  leadingIcon: Icons.image_outlined,
-                  title: "Update Profile Picture"),
-              const SettingsListItem(
-                  leadingIcon: Icons.password, title: "Update Password"),
+                leadingIcon: Icons.password,
+                title: "Update Password",
+              ),
+              SettingsListItem(
+                leadingIcon: Icons.image_outlined,
+                title: "My Profile Pictures",
+                onTap: () {
+                  Get.to(const ProfilePictureScreen());
+                },
+              ),
               const SettingsListItem(
                 leadingIcon: Icons.book_outlined,
                 title: "Stories Archives",
@@ -94,22 +111,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 startItem: true,
                 tailingWidget: SizedBox(
                   height: 15,
-                  child: GetBuilder<ThemeController>(
-                    builder: (controller) {
-                      return CupertinoSwitch(
-                        value: controller.darkMoodActivated,
-                        thumbColor: ColorConstants.primary,
-                        activeColor: ColorConstants.secondary,
-                        onChanged: (value) {
-                          if(value) {
-                            controller.activateDarkMood();
-                          } else {
-                            controller.deactivateDarkMood();
-                          }
-                        },
-                      );
-                    }
-                  ),
+                  child: GetBuilder<ThemeController>(builder: (controller) {
+                    return CupertinoSwitch(
+                      value: controller.darkMoodActivated,
+                      thumbColor: ColorConstants.primary,
+                      activeColor: ColorConstants.secondary,
+                      onChanged: (value) {
+                        if (value) {
+                          controller.activateDarkMood();
+                        } else {
+                          controller.deactivateDarkMood();
+                        }
+                      },
+                    );
+                  }),
                 ),
               ),
               const SettingsListItem(

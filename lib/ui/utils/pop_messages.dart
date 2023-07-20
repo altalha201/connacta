@@ -11,7 +11,12 @@ class PopMessages {
     ));
   }
 
-  static void showAlertMessage({String title = "Alert", String message = "Give Your Message"}) {
+  static void showAlertMessage(
+      {String title = "Alert",
+      String message = "Give Your Message",
+      String confirmText = "OK",
+      Color confirmColor = Colors.green,
+      Widget? content}) {
     Get.defaultDialog(
       title: title,
       middleText: message,
@@ -20,9 +25,13 @@ class PopMessages {
         onPressed: () {
           Get.back();
         },
-        child: const Text("OK", style: TextStyle(color: Colors.green),),
+        child: Text(
+          confirmText,
+          style: TextStyle(color: confirmColor),
+        ),
       ),
-      radius: 8.0
+      radius: 8.0,
+      content: content,
     );
   }
 }

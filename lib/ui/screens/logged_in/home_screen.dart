@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../constants/asset_constants.dart';
 import '../../../constants/color_constants.dart';
+import '../../../controller/logic_controller/profile_data_controller.dart';
 import '../../../controller/ui_controllers/home_screen_controller.dart';
 import '../../../controller/ui_controllers/theme_controller.dart';
 import 'settings_screen.dart';
@@ -15,6 +16,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  @override
+  void initState() {
+    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) {
+      Get.find<ProfileDataController>().getUser();
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeScreenController>(builder: (homeController) {

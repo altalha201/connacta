@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
+import '../../../constants/asset_constants.dart';
 import '../../../constants/color_constants.dart';
 import '../../../controller/logic_controller/signup_controller.dart';
 import '../../widgets/appbars/appbars.dart';
@@ -98,84 +99,85 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                   Row(
                     children: [
                       Expanded(
-                          flex: 1,
-                          child: BorderTextField(
-                            hintText: "Country Code",
-                            readOnly: true,
-                            controller: _countryCode,
-                            validator: (value) {
-                              if(value?.isEmpty ?? true) {
-                                return 'Select Country Code';
-                              }
-                              return null;
-                            },
-                            onTap: () {
-                              Get.bottomSheet(
-                                  Container(
-                                    padding: const EdgeInsets.all(16.0),
-                                    decoration: const BoxDecoration(
-                                        color: ColorConstants.white,
-                                        borderRadius: BorderRadius.vertical(
-                                            top: Radius.circular(25))),
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          "Select Country Code",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline5!
-                                              .copyWith(
-                                                  color: ColorConstants.black),
+                        flex: 1,
+                        child: BorderTextField(
+                          hintText: "Country Code",
+                          readOnly: true,
+                          controller: _countryCode,
+                          validator: (value) {
+                            if (value?.isEmpty ?? true) {
+                              return 'Select Country Code';
+                            }
+                            return null;
+                          },
+                          onTap: () {
+                            Get.bottomSheet(
+                                Container(
+                                  padding: const EdgeInsets.all(16.0),
+                                  decoration: const BoxDecoration(
+                                      color: ColorConstants.white,
+                                      borderRadius: BorderRadius.vertical(
+                                          top: Radius.circular(25))),
+                                  child: Column(
+                                    children: [
+                                      const Text(
+                                        "Select Country Code",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500,
+                                          color: ColorConstants.black,
                                         ),
-                                        Space.vertical(size: 32.0),
-                                        ListTile(
-                                          leading: const Flag.fromString(
-                                            "BD",
-                                            width: 100,
-                                          ),
-                                          title: const Text("Bangladesh"),
-                                          subtitle: const Text("+880"),
-                                          onTap: () {
-                                            setState(() {
-                                              _countryCode.text = "+880";
-                                            });
-                                            Get.back();
-                                          },
+                                      ),
+                                      Space.vertical(size: 32.0),
+                                      ListTile(
+                                        leading: const Flag.fromString(
+                                          "BD",
+                                          width: 100,
                                         ),
-                                        ListTile(
-                                          leading: const Flag.fromString(
-                                            "IN",
-                                            width: 100,
-                                          ),
-                                          title: const Text("India"),
-                                          subtitle: const Text("+91"),
-                                          onTap: () {
-                                            setState(() {
-                                              _countryCode.text = "+91";
-                                            });
-                                            Get.back();
-                                          },
+                                        title: const Text("Bangladesh"),
+                                        subtitle: const Text("+880"),
+                                        onTap: () {
+                                          setState(() {
+                                            _countryCode.text = "+880";
+                                          });
+                                          Get.back();
+                                        },
+                                      ),
+                                      ListTile(
+                                        leading: const Flag.fromString(
+                                          "IN",
+                                          width: 100,
                                         ),
-                                        ListTile(
-                                          leading: const Flag.fromString(
-                                            "PK",
-                                            width: 100,
-                                          ),
-                                          title: const Text("Pakistan"),
-                                          subtitle: const Text("+92"),
-                                          onTap: () {
-                                            setState(() {
-                                              _countryCode.text = "+92";
-                                            });
-                                            Get.back();
-                                          },
+                                        title: const Text("India"),
+                                        subtitle: const Text("+91"),
+                                        onTap: () {
+                                          setState(() {
+                                            _countryCode.text = "+91";
+                                          });
+                                          Get.back();
+                                        },
+                                      ),
+                                      ListTile(
+                                        leading: const Flag.fromString(
+                                          "PK",
+                                          width: 100,
                                         ),
-                                      ],
-                                    ),
+                                        title: const Text("Pakistan"),
+                                        subtitle: const Text("+92"),
+                                        onTap: () {
+                                          setState(() {
+                                            _countryCode.text = "+92";
+                                          });
+                                          Get.back();
+                                        },
+                                      ),
+                                    ],
                                   ),
-                                  backgroundColor: Colors.transparent);
-                            },
-                          ),),
+                                ),
+                                backgroundColor: Colors.transparent);
+                          },
+                        ),
+                      ),
                       Space.horizontal(size: 8.0),
                       Expanded(
                         flex: 2,
@@ -255,8 +257,12 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                             phoneNumber: phone,
                             dob: _dobET.text,
                             gender: _selectedGender);
-                        if(response) {
-                          Get.to(PhotoSelectScreen(name: name, email: signup.email,));
+                        if (response) {
+                          Get.to(PhotoSelectScreen(
+                            name: name,
+                            email: signup.email,
+                            imgURL: AssetConstants.defaultProfile,
+                          ));
                         }
                       }
                     },
