@@ -130,6 +130,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                                       ),
                                       Space.vertical(size: 32.0),
                                       ListTile(
+                                        textColor: ColorConstants.black,
                                         leading: const Flag.fromString(
                                           "BD",
                                           width: 100,
@@ -144,6 +145,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                                         },
                                       ),
                                       ListTile(
+                                        textColor: ColorConstants.black,
                                         leading: const Flag.fromString(
                                           "IN",
                                           width: 100,
@@ -158,6 +160,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                                         },
                                       ),
                                       ListTile(
+                                        textColor: ColorConstants.black,
                                         leading: const Flag.fromString(
                                           "PK",
                                           width: 100,

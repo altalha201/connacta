@@ -56,4 +56,11 @@ class ProfileDataController extends GetxController {
 
     return success;
   }
+
+  Future<void> updateInSearch(Map<String, dynamic> data) async {
+    await _dbInstance
+        .collection('search_user')
+        .doc(Get.find<UserPreferences>().userID)
+        .update(data);
+  }
 }

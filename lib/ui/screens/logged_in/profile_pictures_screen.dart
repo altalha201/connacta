@@ -68,7 +68,7 @@ class _ProfilePictureScreenState extends State<ProfilePictureScreen> {
               }
 
               return Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(12.0),
                 child: SingleChildScrollView(
                   child: RefreshIndicator(
                     onRefresh: () async {

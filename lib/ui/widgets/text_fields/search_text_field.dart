@@ -5,7 +5,11 @@ import '../../../constants/color_constants.dart';
 class SearchTextField extends StatelessWidget {
   const SearchTextField({
     Key? key,
+    this.controller, this.onChange,
   }) : super(key: key);
+
+  final TextEditingController? controller;
+  final Function(String)? onChange;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +27,8 @@ class SearchTextField extends StatelessWidget {
             ),
             Expanded(
               child: TextFormField(
+                controller: controller,
+                onChanged: onChange,
                 decoration: InputDecoration(
                     contentPadding:
                         const EdgeInsets.symmetric(horizontal: 16.0),

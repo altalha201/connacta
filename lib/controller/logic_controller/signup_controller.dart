@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../constants/asset_constants.dart';
 import '../../data/model/user_model.dart';
+import '../../data/utils/conversion.dart';
 import '../../ui/utils/pop_messages.dart';
 import '../data_controller/user_preferences.dart';
 import 'device_key_controller.dart';
@@ -87,6 +88,13 @@ class SignupController extends GetxController {
         .onError((error, stackTrace) {
       log(error.toString());
       returnBool = false;
+    });
+
+    await db.collection('search_user').doc(newUser.userId).set({
+      'user_id': newUser.userId,
+      'user_name': newUser.userName,
+      'user_name_array': Conversion.stringToArray(newUser.userName!),
+      'user_img': newUser.userDpUrl
     });
 
     _creatingProfile = false;

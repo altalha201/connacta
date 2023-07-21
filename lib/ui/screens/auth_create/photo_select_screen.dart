@@ -60,6 +60,8 @@ class _PhotoSelectScreenState extends State<PhotoSelectScreen> {
 
       await Get.find<ProfileDataController>()
           .updateProfileData({'user_dp_url': newImgURL});
+      await Get.find<ProfileDataController>()
+          .updateInSearch({'user_img': newImgURL});
 
       setState(() {
         _imageURL = newImgURL;

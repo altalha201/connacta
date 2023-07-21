@@ -12,13 +12,13 @@ class ImageListLoading extends StatelessWidget {
       baseColor: ColorConstants.gray,
       highlightColor: ColorConstants.white,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0),
         child: SingleChildScrollView(
           child: Wrap(
             children: [
               for(int i = 0; i <= 14; i++)
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(4.0),
                   child: Container(
                     height: 100,
                     width: 100,
