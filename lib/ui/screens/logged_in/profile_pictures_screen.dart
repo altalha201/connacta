@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../constants/asset_constants.dart';
 import '../../../controller/logic_controller/get_own_photos_controller.dart';
+import '../../../controller/logic_controller/profile_data_controller.dart';
+import '../../widgets/list_item/divider_title.dart';
 import '../../widgets/loading_widgets/image_list_loading.dart';
 import '../../widgets/picture_widgets/display_picture.dart';
 import '../../widgets/picture_widgets/image_list_item.dart';
@@ -15,10 +18,10 @@ class ProfilePictureScreen extends StatefulWidget {
 }
 
 class _ProfilePictureScreenState extends State<ProfilePictureScreen> {
-
   @override
   void initState() {
-    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) async {
+    WidgetsFlutterBinding.ensureInitialized()
+        .addPostFrameCallback((timeStamp) async {
       await Get.find<GetOwnPhotosController>().getPhotos();
     });
     super.initState();
@@ -37,23 +40,15 @@ class _ProfilePictureScreenState extends State<ProfilePictureScreen> {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                const SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    "Current Profile Picture",
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ),
+                const DividerTitle(title: "Current Profile Picture"),
                 Space.vertical(size: 16.0),
-                const DisplayPicture(),
-                Space.vertical(size: 32.0),
-                const SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    "All Pictures",
-                    style: TextStyle(fontSize: 16),
-                  ),
+                DisplayPicture(
+                  imgURL:
+                      Get.find<ProfileDataController>().currentUser.userDpUrl ??
+                          AssetConstants.defaultProfile,
                 ),
+                Space.vertical(size: 32.0),
+                const DividerTitle(title: "All Pictures")
               ],
             ),
           ),
@@ -63,8 +58,10 @@ class _ProfilePictureScreenState extends State<ProfilePictureScreen> {
                 return const ImageListLoading();
               }
 
-              if(controller.imgURLs.isEmpty) {
-                return const Center(child: Text("No Image Found"),);
+              if (controller.imgURLs.isEmpty) {
+                return const Center(
+                  child: Text("No Image Found"),
+                );
               }
 
               return Padding(

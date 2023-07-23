@@ -7,7 +7,13 @@ class TextStyles {
   );
 
   static TextStyle appbarTitle = const TextStyle(
-      fontSize: 20,
-      fontWeight: FontWeight.w700,
+    fontSize: 20,
+    fontWeight: FontWeight.w700,
+  );
+
+  static TextStyle titleNameStyle = const TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.w200,
+    fontFamily: 'barlow',
   );
 }

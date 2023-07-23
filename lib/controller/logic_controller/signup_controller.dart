@@ -5,7 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 import '../../constants/asset_constants.dart';
-import '../../data/model/user_model.dart';
+import '../../data/model/user_details_model.dart';
+import '../../data/model/user_info_model.dart';
 import '../../data/utils/conversion.dart';
 import '../../ui/utils/pop_messages.dart';
 import '../data_controller/user_preferences.dart';
@@ -70,7 +71,7 @@ class SignupController extends GetxController {
     _creatingProfile = true;
     update();
     bool returnBool = true;
-    final UserModel newUser = UserModel(
+    final UserDetailsModel newUser = UserDetailsModel(
         userId: Get.find<UserPreferences>().userID,
         userName: name,
         userDob: dob,
@@ -90,12 +91,13 @@ class SignupController extends GetxController {
       returnBool = false;
     });
 
-    await db.collection('search_user').doc(newUser.userId).set({
-      'user_id': newUser.userId,
-      'user_name': newUser.userName,
-      'user_name_array': Conversion.stringToArray(newUser.userName!),
-      'user_img': newUser.userDpUrl
-    });
+    final userInfo = UserInfoModel(
+      userName: newUser.userName,
+      userId: newUser.userId,
+      userImg: newUser.userDpUrl,
+      userNameArray: Conversion.stringToArray(newUser.userName!)
+    );
+    await db.collection('search_user').doc(newUser.userId).set(userInfo.toJson());
 
     _creatingProfile = false;
     update();

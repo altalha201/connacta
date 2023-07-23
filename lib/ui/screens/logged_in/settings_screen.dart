@@ -7,12 +7,15 @@ import '../../../constants/color_constants.dart';
 import '../../../controller/data_controller/user_preferences.dart';
 import '../../../controller/logic_controller/profile_data_controller.dart';
 import '../../../controller/ui_controllers/theme_controller.dart';
+import '../../utils/text_styles.dart';
+import '../../widgets/appbars/appbars.dart';
 import '../../widgets/list_item/settings_list_item.dart';
 import '../../widgets/picture_widgets/display_picture.dart';
+import '../../widgets/picture_widgets/image_view.dart';
 import '../../widgets/space.dart';
 import '../auth_create/photo_select_screen.dart';
-import 'home_screen.dart';
 import 'profile_pictures_screen.dart';
+import 'profile_view.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -27,30 +30,72 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Me"),
-        leading: BackButton(
-          onPressed: () {
-            Get.off(const HomeScreen());
-          },
-        ),
-      ),
+      appBar: Appbars.backButtonAppbar(title: "Me"),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const DisplayPicture(),
-              Space.vertical(size: 16.0),
-              Text(
-                profileDataInstance.currentUser.userName ?? "Name",
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w200,
-                  fontFamily: 'barlow',
-                ),
+              DisplayPicture(
+                imgURL: profileDataInstance.currentUser.userDpUrl ??
+                    AssetConstants.defaultProfile,
+                onPress: () {
+                  Get.bottomSheet(
+                    Container(
+                      height: 160,
+                      decoration: BoxDecoration(
+                        color: Get.find<ThemeController>().darkMoodActivated
+                            ? ColorConstants.black
+                            : ColorConstants.white,
+                        borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(25),
+                        ),
+                      ),
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        children: [
+                          ListTile(
+                            title: const Text("View Profile Picture"),
+                            leading: const Icon(Icons.image_outlined),
+                            tileColor: ColorConstants.gray.withOpacity(0.4),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            onTap: () {
+                              Get.to(ImageView(
+                                image:
+                                    profileDataInstance.currentUser.userDpUrl ??
+                                        AssetConstants.defaultProfile,
+                              ));
+                            },
+                          ),
+                          Space.vertical(size: 8.0),
+                          ListTile(
+                            title: const Text("View Profile"),
+                            leading: const Icon(Icons.person),
+                            tileColor: Colors.grey.shade500,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            onTap: () {
+                              Get.to(ProfileView(
+                                userId:
+                                    profileDataInstance.currentUser.userId ??
+                                        "",
+                                selfProfile: true,
+                              ));
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
               ),
+              Space.vertical(size: 16.0),
+              Text(profileDataInstance.currentUser.userName ?? "Name",
+                  style: TextStyles.titleNameStyle),
               Space.vertical(size: 32.0),
               const SizedBox(
                 width: double.infinity,

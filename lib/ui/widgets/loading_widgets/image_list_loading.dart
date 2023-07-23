@@ -20,8 +20,8 @@ class ImageListLoading extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Container(
-                    height: 100,
-                    width: 100,
+                    height: 90,
+                    width: 90,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: ColorConstants.gray.withOpacity(0.6),

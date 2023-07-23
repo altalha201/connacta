@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../constants/asset_constants.dart';
 import '../../../constants/color_constants.dart';
+import '../../../controller/logic_controller/profile_data_controller.dart';
 import '../../utils/text_styles.dart';
 
 class StoryItem extends StatelessWidget {
   const StoryItem({
-    Key? key, this.self = false,
+    Key? key,
+    this.self = false,
   }) : super(key: key);
 
   final bool self;
@@ -20,13 +23,15 @@ class StoryItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         color: ColorConstants.gray,
         image: DecorationImage(
-            image: NetworkImage(self? AssetConstants.defaultProfile : AssetConstants.defaultDay),
+            image: NetworkImage(self
+                ? (Get.find<ProfileDataController>().currentUser.userDpUrl ??
+                    AssetConstants.defaultProfile)
+                : AssetConstants.defaultDay),
             colorFilter: ColorFilter.mode(
               ColorConstants.black.withOpacity(0.4),
               BlendMode.darken,
             ),
-            fit: BoxFit.cover
-        ),
+            fit: BoxFit.cover),
       ),
       padding: const EdgeInsets.all(16.0),
       alignment: Alignment.centerLeft,
@@ -36,7 +41,11 @@ class StoryItem extends StatelessWidget {
         children: [
           Visibility(
             visible: !self,
-            replacement: const Icon(Icons.add_circle, size: 32, color: ColorConstants.white,),
+            replacement: const Icon(
+              Icons.add_circle,
+              size: 32,
+              color: ColorConstants.white,
+            ),
             child: Container(
               height: 32,
               width: 32,
@@ -52,8 +61,12 @@ class StoryItem extends StatelessWidget {
           ),
           Flexible(
             child: Text(
-              "User Name",
-              style: TextStyles.usernameStyle.copyWith(color: ColorConstants.white),
+              self
+                  ? (Get.find<ProfileDataController>().currentUser.userName ??
+                      "")
+                  : "User Name",
+              style: TextStyles.usernameStyle
+                  .copyWith(color: ColorConstants.white),
             ),
           ),
         ],

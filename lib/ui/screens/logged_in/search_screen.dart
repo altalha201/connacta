@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:connacta/ui/widgets/appbars/appbars.dart';
-import 'package:connacta/ui/widgets/list_item/user_list_item.dart';
-import 'package:connacta/ui/widgets/text_fields/search_text_field.dart';
 import 'package:flutter/material.dart';
+
+import '../../../data/model/user_info_model.dart';
+import '../../widgets/appbars/appbars.dart';
+import '../../widgets/list_item/user_list_item.dart';
+import '../../widgets/text_fields/search_text_field.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -12,7 +14,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  List _searchResult = [];
+  List<UserInfoModel> _searchResult = [];
 
   Future<void> search(String query) async {
     final result = await FirebaseFirestore.instance
@@ -21,7 +23,7 @@ class _SearchScreenState extends State<SearchScreen> {
         .get();
 
     setState(() {
-      _searchResult = result.docs.map((e) => e.data()).toList();
+      _searchResult = result.docs.map((e) => UserInfoModel.fromJson(e.data())).toList();
     });
   }
 
@@ -42,12 +44,8 @@ class _SearchScreenState extends State<SearchScreen> {
               child: ListView.builder(
                 itemCount: _searchResult.length,
                 itemBuilder: (context, index) {
-                  var item = _searchResult.elementAt(index);
                   return UserListItem(
-                    userName: item["user_name"],
-                    userImg: item["user_img"],
-                    userID: item["user_id"],
-                    fromSearch: true,
+                    userData: _searchResult.elementAt(index),
                   );
                 },
               ),

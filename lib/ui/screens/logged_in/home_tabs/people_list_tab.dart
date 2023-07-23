@@ -1,11 +1,12 @@
-import 'package:connacta/ui/widgets/list_item/settings_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-import '../../../../constants/asset_constants.dart';
+import '../../../../data/model/user_info_model.dart';
+import '../../../widgets/list_item/settings_list_item.dart';
 import '../../../widgets/list_item/user_list_item.dart';
 import '../../../widgets/space.dart';
+import '../request_list_screen.dart';
 import '../search_screen.dart';
 
 class PeopleListTab extends StatefulWidget {
@@ -22,11 +23,14 @@ class _PeopleListTabState extends State<PeopleListTab> {
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
-          const SettingsListItem(
-              leadingIcon: Icons.people_alt_outlined,
-              title: "See Friend Requests",
+          SettingsListItem(
+            leadingIcon: Icons.people_alt_outlined,
+            title: "See Friend Requests",
             startItem: true,
             lastItem: true,
+            onTap: () {
+              Get.off(const RequestListScreen());
+            },
           ),
           Space.vertical(size: 16.0),
           Row(
@@ -63,10 +67,8 @@ class _PeopleListTabState extends State<PeopleListTab> {
               child: Column(
                 children: [
                   for (int i = 0; i < 20; i++)
-                    const UserListItem(
-                      userName: 'User Name',
-                      userImg: AssetConstants.defaultProfile,
-                      userID: '',
+                    UserListItem(
+                      userData: UserInfoModel(),
                     )
                 ],
               ),

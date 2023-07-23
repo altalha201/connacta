@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
-import '../../data/model/user_model.dart';
+import '../../data/model/user_details_model.dart';
 import '../data_controller/user_preferences.dart';
 
 class ProfileDataController extends GetxController {
@@ -12,9 +12,9 @@ class ProfileDataController extends GetxController {
 
   bool get updatingData => _updatingData;
 
-  UserModel _currentUser = UserModel();
+  UserDetailsModel _currentUser = UserDetailsModel();
 
-  UserModel get currentUser => _currentUser;
+  UserDetailsModel get currentUser => _currentUser;
 
   final _dbInstance = FirebaseFirestore.instance;
 
@@ -31,7 +31,7 @@ class ProfileDataController extends GetxController {
       data = value.data();
     });
 
-    _currentUser = UserModel.fromJson(data!);
+    _currentUser = UserDetailsModel.fromJson(data!);
 
     _gettingUser = false;
     update();
