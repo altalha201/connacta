@@ -27,6 +27,8 @@ class ProfileViewController extends GetxController {
     _profileGetting = true;
     update();
 
+    _isFriend = false;
+
     late final Map<String, dynamic>? data;
     await _dbInstance
         .collection('user_details')
@@ -55,7 +57,7 @@ class ProfileViewController extends GetxController {
       late final Map<String, dynamic>? userData;
       await _dbInstance
       .collection('user_items')
-      .doc('friend_list')
+      .doc('friends')
       .collection(Get.find<ProfileDataController>().currentUser.userId ?? "").doc(userID)
       .get().then((value) {
         userData = value.data();

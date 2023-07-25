@@ -4,9 +4,14 @@ import 'package:get/get.dart';
 
 import '../../../constants/asset_constants.dart';
 import '../../../constants/color_constants.dart';
+import '../../../controller/logic_controller/friend_request_controller.dart';
 import '../../../controller/logic_controller/profile_view_controller.dart';
+import '../../../data/model/user_info_model.dart';
+import '../../../data/utils/conversion.dart';
+import '../../utils/pop_messages.dart';
 import '../../utils/text_styles.dart';
 import '../../widgets/appbars/appbars.dart';
+import '../../widgets/buttons/wide_icon_elevated_button.dart';
 import '../../widgets/list_item/divider_title.dart';
 import '../../widgets/list_item/profile_details_item.dart';
 import '../../widgets/loading_widgets/profile_loader.dart';
@@ -83,35 +88,50 @@ class _ProfileViewState extends State<ProfileView> {
                                 child: Expanded(
                                   child: Row(
                                     children: [
-                                      Expanded(
-                                        child: ElevatedButton.icon(
-                                          onPressed: () {},
-                                          style: ElevatedButton.styleFrom(
-                                            padding: const EdgeInsets.all(16.0),
-                                          ),
-                                          icon: Icon(
-                                            widget.fromRequest ? FontAwesomeIcons.userCheck : FontAwesomeIcons.userPlus,
-                                            size: 12,
-                                          ),
-                                          label: Text(widget.fromRequest ? "Response" : "Add Friend"),
+                                      Expanded(child: WideIconElevatedButton(
+                                        icon: Icon(
+                                          widget.fromRequest
+                                              ? FontAwesomeIcons.userCheck
+                                              : FontAwesomeIcons.userPlus,
+                                          size: 12,
                                         ),
-                                      ),
+                                        labelText: widget.fromRequest
+                                            ? "Response"
+                                            : "Add Friend",
+                                        onPressed: () {
+                                          final user = UserInfoModel(
+                                            userName:
+                                            controller.user.userName,
+                                            userId: controller.user.userId,
+                                            userImg:
+                                            controller.user.userDpUrl,
+                                            userNameArray:
+                                            Conversion.stringToArray(
+                                                controller
+                                                    .user.userName ??
+                                                    ""),
+                                          );
+                                          if (widget.fromRequest) {
+                                            PopMessages.friendRequestResponse(
+                                                sender: user);
+                                          } else {
+                                            Get.find<
+                                                FriendRequestController>()
+                                                .sendRequest(receiver: user);
+                                          }
+                                        },
+                                      ),),
                                       Space.horizontal(size: 8.0),
                                     ],
                                   ),
                                 ),
                               ),
                               Expanded(
-                                child: ElevatedButton.icon(
+                                child: WideIconElevatedButton(
+                                  icon: const ImageIcon(AssetImage(AssetConstants.iconLogo),),
+                                  labelText: "Message",
+                                  backgroundColor: ColorConstants.green,
                                   onPressed: () {},
-                                  style: ElevatedButton.styleFrom(
-                                      padding: const EdgeInsets.all(16.0),
-                                      backgroundColor: ColorConstants.green),
-                                  icon: const Icon(
-                                    FontAwesomeIcons.facebookMessenger,
-                                    size: 12,
-                                  ),
-                                  label: const Text("Message"),
                                 ),
                               ),
                             ],
