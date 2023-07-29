@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import 'controller/data_controller/app_preferences.dart';
 import 'controller/data_controller/user_preferences.dart';
+import 'controller/logic_controller/chat_controller.dart';
+import 'controller/logic_controller/single_chat_controller.dart';
 import 'controller/logic_controller/friend_request_controller.dart';
 import 'controller/logic_controller/get_own_photos_controller.dart';
 import 'controller/logic_controller/login_controller.dart';
@@ -15,7 +17,9 @@ class ConnactaBindings extends Bindings {
   @override
   void dependencies() {
     Get.put(AppPreferences());
+    Get.put(SingleChatController());
     Get.put(FriendRequestController());
+    Get.put(ChatController());
     Get.put(GetOwnPhotosController());
     Get.put(HomeScreenController());
     Get.put(LoginController());

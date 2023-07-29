@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../constants/asset_constants.dart';
 import '../../controller/data_controller/app_preferences.dart';
 import '../../controller/data_controller/user_preferences.dart';
+import '../../controller/logic_controller/profile_data_controller.dart';
 import '../../controller/ui_controllers/theme_controller.dart';
 import 'logged_in/home_screen.dart';
 import 'login_screen.dart';
@@ -20,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) {
+    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) async {
       Get.find<AppPreferences>().getAppTheme();
       if(Get.find<AppPreferences>().appTheme != null) {
         Get.find<ThemeController>().setTheme(Get.find<AppPreferences>().appTheme!);
@@ -29,8 +30,9 @@ class _SplashScreenState extends State<SplashScreen> {
         setState(() {
           isLoading = true;
         });
-        Future.delayed(const Duration(seconds: 2)).then((value) {
+        Future.delayed(const Duration(seconds: 2)).then((value) async {
           if(Get.find<UserPreferences>().isLogIn()) {
+            await Get.find<ProfileDataController>().getUser();
             Get.offAll(const HomeScreen(), transition: Transition.downToUp);
           } else {
             Get.offAll(const LoginScreen(), transition: Transition.downToUp);

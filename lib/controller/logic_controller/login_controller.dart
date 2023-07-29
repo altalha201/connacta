@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../ui/utils/pop_messages.dart';
 import '../data_controller/user_preferences.dart';
 import 'device_key_controller.dart';
+import 'profile_data_controller.dart';
 
 class LoginController extends GetxController{
   bool _loginInProgress = false;
@@ -23,6 +24,7 @@ class LoginController extends GetxController{
       );
       if (credential.user != null) {
         Get.find<UserPreferences>().saveUserID(credential.user!.uid);
+        await Get.find<ProfileDataController>().getUser();
         await DeviceKeyController().updateToken();
         returnBool = true;
       }

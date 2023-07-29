@@ -5,9 +5,11 @@ import 'package:get/get.dart';
 import '../../../constants/asset_constants.dart';
 import '../../../constants/color_constants.dart';
 import '../../../controller/logic_controller/friend_request_controller.dart';
+import '../../../controller/logic_controller/profile_data_controller.dart';
 import '../../../controller/logic_controller/profile_view_controller.dart';
 import '../../../data/model/user_info_model.dart';
 import '../../../data/utils/conversion.dart';
+import '../../../data/utils/functions.dart';
 import '../../utils/pop_messages.dart';
 import '../../utils/text_styles.dart';
 import '../../widgets/appbars/appbars.dart';
@@ -88,39 +90,41 @@ class _ProfileViewState extends State<ProfileView> {
                                 child: Expanded(
                                   child: Row(
                                     children: [
-                                      Expanded(child: WideIconElevatedButton(
-                                        icon: Icon(
-                                          widget.fromRequest
-                                              ? FontAwesomeIcons.userCheck
-                                              : FontAwesomeIcons.userPlus,
-                                          size: 12,
+                                      Expanded(
+                                        child: WideIconElevatedButton(
+                                          icon: Icon(
+                                            widget.fromRequest
+                                                ? FontAwesomeIcons.userCheck
+                                                : FontAwesomeIcons.userPlus,
+                                            size: 12,
+                                          ),
+                                          labelText: widget.fromRequest
+                                              ? "Response"
+                                              : "Add Friend",
+                                          onPressed: () {
+                                            final user = UserInfoModel(
+                                              userName:
+                                                  controller.user.userName,
+                                              userId: controller.user.userId,
+                                              userImg:
+                                                  controller.user.userDpUrl,
+                                              userNameArray:
+                                                  Conversion.stringToArray(
+                                                      controller
+                                                              .user.userName ??
+                                                          ""),
+                                            );
+                                            if (widget.fromRequest) {
+                                              PopMessages.friendRequestResponse(
+                                                  sender: user);
+                                            } else {
+                                              Get.find<
+                                                      FriendRequestController>()
+                                                  .sendRequest(receiver: user);
+                                            }
+                                          },
                                         ),
-                                        labelText: widget.fromRequest
-                                            ? "Response"
-                                            : "Add Friend",
-                                        onPressed: () {
-                                          final user = UserInfoModel(
-                                            userName:
-                                            controller.user.userName,
-                                            userId: controller.user.userId,
-                                            userImg:
-                                            controller.user.userDpUrl,
-                                            userNameArray:
-                                            Conversion.stringToArray(
-                                                controller
-                                                    .user.userName ??
-                                                    ""),
-                                          );
-                                          if (widget.fromRequest) {
-                                            PopMessages.friendRequestResponse(
-                                                sender: user);
-                                          } else {
-                                            Get.find<
-                                                FriendRequestController>()
-                                                .sendRequest(receiver: user);
-                                          }
-                                        },
-                                      ),),
+                                      ),
                                       Space.horizontal(size: 8.0),
                                     ],
                                   ),
@@ -128,10 +132,32 @@ class _ProfileViewState extends State<ProfileView> {
                               ),
                               Expanded(
                                 child: WideIconElevatedButton(
-                                  icon: const ImageIcon(AssetImage(AssetConstants.iconLogo),),
+                                  icon: const ImageIcon(
+                                    AssetImage(AssetConstants.iconLogo),
+                                  ),
                                   labelText: "Message",
                                   backgroundColor: ColorConstants.green,
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    var p1D = controller.user;
+                                    var p2D = Get.find<ProfileDataController>().currentUser;
+
+                                    var p1 = UserInfoModel(
+                                      userId: p1D.userId,
+                                      userName: p1D.userName,
+                                      userImg: p1D.userDpUrl,
+                                      userNameArray: Conversion.stringToArray(p1D.userName ?? ""),
+                                    );
+                                    var p2 = UserInfoModel(
+                                      userId: p2D.userId,
+                                      userName: p2D.userName,
+                                      userImg: p2D.userDpUrl,
+                                      userNameArray: Conversion.stringToArray(p2D.userName ?? ""),
+                                    );
+                                    await Functions.gotoChatRoom(
+                                      p1: p1,
+                                      p2: p2,
+                                    );
+                                  },
                                 ),
                               ),
                             ],
