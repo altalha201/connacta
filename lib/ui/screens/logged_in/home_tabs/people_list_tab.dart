@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import '../../../../constants/asset_constants.dart';
 import '../../../../controller/logic_controller/profile_data_controller.dart';
 import '../../../../data/model/user_info_model.dart';
+import '../../../utils/text_styles.dart';
 import '../../../widgets/list_item/settings_list_item.dart';
 import '../../../widgets/list_item/user_list_item.dart';
 import '../../../widgets/loading_widgets/user_list_loading.dart';
@@ -111,6 +112,15 @@ class _PeopleListTabState extends State<PeopleListTab> {
                     log(user.userName ?? "No Name");
                   }
 
+                  if(_friendList.isEmpty) {
+                    return Center(
+                      child: Text(
+                        "No Friends",
+                        style: TextStyles.usernameStyle,
+                      ),
+                    );
+                  }
+
                   return ListView.builder(
                     itemCount: _friendList.length,
                     itemBuilder: (context, index) {
@@ -124,8 +134,11 @@ class _PeopleListTabState extends State<PeopleListTab> {
                     },
                   );
                 } else {
-                  return const Center(
-                    child: Text("No Friends"),
+                  return Center(
+                    child: Text(
+                      "No Friends",
+                      style: TextStyles.usernameStyle,
+                    ),
                   );
                 }
               },

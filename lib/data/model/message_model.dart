@@ -1,5 +1,6 @@
 class MessageModel {
   String? messageId;
+  String? chatID;
   String? senderId;
   String? senderName;
   String? senderDpUrl;
@@ -9,6 +10,7 @@ class MessageModel {
 
   MessageModel(
       {this.messageId,
+        this.chatID,
         this.senderId,
         this.senderName,
         this.senderDpUrl,
@@ -18,6 +20,7 @@ class MessageModel {
 
   MessageModel.fromJson(Map<String, dynamic> json) {
     messageId = json['message_id'];
+    chatID = json['chat_id'];
     senderId = json['sender_id'];
     senderName = json['sender_name'];
     senderDpUrl = json['sender_dp_url'];
@@ -29,6 +32,7 @@ class MessageModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['message_id'] = messageId;
+    data['chat_id'] = chatID;
     data['sender_id'] = senderId;
     data['sender_name'] = senderName;
     data['sender_dp_url'] = senderDpUrl;

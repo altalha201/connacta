@@ -70,6 +70,7 @@ class _PhotoSelectScreenState extends State<PhotoSelectScreen> {
       PopMessages.showSnackBarMessage(
           title: "Success", messages: "New Profile Picture Upload Successful");
 
+      await Get.find<ProfileDataController>().getUser();
       Get.offAll(const HomeScreen());
     }
   }

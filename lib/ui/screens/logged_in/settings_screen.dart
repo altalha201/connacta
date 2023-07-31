@@ -7,6 +7,7 @@ import '../../../constants/color_constants.dart';
 import '../../../controller/data_controller/user_preferences.dart';
 import '../../../controller/logic_controller/profile_data_controller.dart';
 import '../../../controller/ui_controllers/theme_controller.dart';
+import '../../utils/pop_messages.dart';
 import '../../utils/text_styles.dart';
 import '../../widgets/appbars/appbars.dart';
 import '../../widgets/list_item/settings_list_item.dart';
@@ -194,7 +195,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 startItem: true,
                 lastItem: true,
                 onTap: () {
-                  Get.find<UserPreferences>().logOut();
+                  PopMessages.yesNoDialog(
+                    title: "Log out",
+                    message: "Want to log out?",
+                    onNo: () {
+                      Get.back();
+                    },
+                    onYes: () {
+                      Get.find<UserPreferences>().logOut();
+                    },
+                  );
                 },
               ),
             ],

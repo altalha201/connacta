@@ -19,6 +19,8 @@ class ChatController extends GetxController {
 
   String get recipientImg => _recipientImg;
 
+  String get recipientID => _recipientID;
+
   final _storageInstance = FirebaseFirestore.instance;
 
   Future<void> getChatProfile({
@@ -82,6 +84,7 @@ class ChatController extends GetxController {
     var currentUser = Get.find<ProfileDataController>().currentUser;
     var message = MessageModel(
       messageId: const Uuid().v1(),
+      chatID: chatID,
       senderId: currentUser.userId,
       senderName: currentUser.userName,
       senderDpUrl: currentUser.userDpUrl,

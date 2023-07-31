@@ -7,6 +7,7 @@ class UserDetailsModel {
   String? userDpUrl;
   String? userGender;
   String? userAddress;
+  String? joinedTime;
 
   UserDetailsModel(
       {this.userId,
@@ -16,7 +17,9 @@ class UserDetailsModel {
         this.userDob,
         this.userDpUrl,
         this.userGender,
-        this.userAddress});
+        this.userAddress,
+        this.joinedTime,
+      });
 
   UserDetailsModel.fromJson(Map<String, dynamic> json) {
     userId = json['user_id'];
@@ -27,6 +30,7 @@ class UserDetailsModel {
     userDpUrl = json['user_dp_url'];
     userGender = json['user_gender'];
     userAddress = json['user_address'];
+    joinedTime = json['created_time'];
   }
 
   Map<String, dynamic> toJson() {
@@ -39,6 +43,7 @@ class UserDetailsModel {
     data['user_dp_url'] = userDpUrl;
     data['user_gender'] = userGender;
     data['user_address'] = userAddress;
+    data['created_time'] = joinedTime;
     return data;
   }
 }

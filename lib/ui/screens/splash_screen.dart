@@ -25,6 +25,9 @@ class _SplashScreenState extends State<SplashScreen> {
       Get.find<AppPreferences>().getAppTheme();
       if(Get.find<AppPreferences>().appTheme != null) {
         Get.find<ThemeController>().setTheme(Get.find<AppPreferences>().appTheme!);
+      } else {
+        var brightness = MediaQuery.of(context).platformBrightness;
+        Get.find<ThemeController>().setTheme(brightness == Brightness.dark);
       }
       Future.delayed(const Duration(seconds: 2), () {
         setState(() {

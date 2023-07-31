@@ -79,7 +79,8 @@ class SignupController extends GetxController {
         userGender: gender,
         userPhone: phoneNumber,
         userAddress: "",
-        userDpUrl: AssetConstants.defaultProfile);
+        userDpUrl: AssetConstants.defaultProfile,
+        joinedTime: DateTime.now().toString());
     final db = FirebaseFirestore.instance;
 
     await db
@@ -92,12 +93,14 @@ class SignupController extends GetxController {
     });
 
     final userInfo = UserInfoModel(
-      userName: newUser.userName,
-      userId: newUser.userId,
-      userImg: newUser.userDpUrl,
-      userNameArray: Conversion.stringToArray(newUser.userName!)
-    );
-    await db.collection('search_user').doc(newUser.userId).set(userInfo.toJson());
+        userName: newUser.userName,
+        userId: newUser.userId,
+        userImg: newUser.userDpUrl,
+        userNameArray: Conversion.stringToArray(newUser.userName!));
+    await db
+        .collection('search_user')
+        .doc(newUser.userId)
+        .set(userInfo.toJson());
 
     _creatingProfile = false;
     update();

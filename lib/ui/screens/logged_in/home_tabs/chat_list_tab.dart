@@ -8,7 +8,7 @@ import '../../../../data/model/user_chat_info_model.dart';
 import '../../../../data/model/user_info_model.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/list_item/chat_list_item.dart';
-import '../../../widgets/loading_widgets/center_loading.dart';
+import '../../../widgets/loading_widgets/chat_list_loading.dart';
 
 class ChatListTab extends StatefulWidget {
   const ChatListTab({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class _ChatListTabState extends State<ChatListTab> {
       .doc("chats")
       .collection(Get.find<ProfileDataController>().currentUser.userId ?? "");
 
-  List<UserChatInfoModel> _chats = [];
+  final List<UserChatInfoModel> _chats = [];
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class _ChatListTabState extends State<ChatListTab> {
       stream: _storageRef.snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CenterLoading();
+          return const ChatListLoading();
         }
 
         if (snapshot.hasData) {
@@ -48,8 +48,16 @@ class _ChatListTabState extends State<ChatListTab> {
           }
 
           _chats.sort(
-              (a, b) => a.latestMessageTime!.compareTo(b.latestMessageTime!));
-          _chats = _chats.reversed.toList();
+              (b, a) => a.latestMessageTime!.compareTo(b.latestMessageTime!));
+
+          if(_chats.isEmpty) {
+            return Center(
+              child: Text(
+                "No Chats Yet.",
+                style: TextStyles.usernameStyle,
+              ),
+            );
+          }
 
           return ListView.builder(
             itemCount: _chats.length,
@@ -60,7 +68,7 @@ class _ChatListTabState extends State<ChatListTab> {
         } else {
           return Center(
             child: Text(
-              "No Chats Ye.t",
+              "No Chats Yet.",
               style: TextStyles.usernameStyle,
             ),
           );

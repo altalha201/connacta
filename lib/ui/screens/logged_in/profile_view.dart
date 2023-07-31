@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../constants/asset_constants.dart';
 import '../../../constants/color_constants.dart';
@@ -208,7 +209,17 @@ class _ProfileViewState extends State<ProfileView> {
                     ),
                     Space.vertical(size: 32.0),
                     const DividerTitle(
-                      title: "Uploaded Pictures",
+                      title: "Joining Info",
+                    ),
+                    Space.vertical(size: 8.0),
+                    ProfileDetailsItem(
+                      icon: Icons.date_range_rounded,
+                      title: 'Joining Date',
+                      value: DateFormat("MMM dd, yyyy").format(DateTime.parse(controller.user.joinedTime ?? "")),
+                    ),
+                    Space.vertical(size: 32.0),
+                    const DividerTitle(
+                      title: "Uploaded Profile Pictures",
                     ),
                     Space.vertical(size: 8.0),
                   ],

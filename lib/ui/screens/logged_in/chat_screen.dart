@@ -16,6 +16,7 @@ import '../../widgets/box_widgets/sent_image_box.dart';
 import '../../widgets/box_widgets/sent_message_box.dart';
 import '../../widgets/loading_widgets/center_loading.dart';
 import '../../widgets/space.dart';
+import 'chat_info_screen.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key, required this.roomID}) : super(key: key);
@@ -74,7 +75,9 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.to(const ChatInfoScreen());
+              },
               icon: const Icon(Icons.info),
             )
           ],
@@ -83,7 +86,7 @@ class _ChatScreenState extends State<ChatScreen> {
           children: [
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
                 child: StreamBuilder<QuerySnapshot>(
                   stream: _storageRef
                       .doc(widget.roomID)
@@ -99,6 +102,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       for (var doc in snapshot.data!.docs) {
                         var message = MessageModel(
                           messageId: doc.get("message_id"),
+                          chatID: doc.get("chat_id"),
                           messageType: doc.get("message_type"),
                           mainMessage: doc.get("main_message"),
                           senderId: doc.get("sender_id"),
@@ -120,15 +124,15 @@ class _ChatScreenState extends State<ChatScreen> {
                             var ms = _messages.elementAt(index);
                             if(ms.senderId == Get.find<ProfileDataController>().currentUser.userId) {
                               if(ms.messageType == "txt") {
-                                return SentMessageBox(message: ms.mainMessage ?? "");
+                                return SentMessageBox(message: ms);
                               } else {
-                                return SentImageBox(imgURL: ms.mainMessage ?? "");
+                                return SentImageBox(message: ms,);
                               }
                             } else {
                               if(ms.messageType == "txt") {
-                                return ReceivedMessageBox(message: ms.mainMessage ?? "", senderImg: ms.senderDpUrl ?? "",);
+                                return ReceivedMessageBox(message: ms);
                               } else {
-                                return ReceivedImageBox(imgURL: ms.mainMessage ?? "", userImg: ms.senderDpUrl ?? "",);
+                                return ReceivedImageBox(message: ms,);
                               }
                             }
                           },
